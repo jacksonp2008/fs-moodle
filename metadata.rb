@@ -1,0 +1,11 @@
+name 'fs-moodle'
+maintainer 'pollock'
+maintainer_email 'spollock@forescout.com'
+license 'all_rights'
+description 'Installs/Configures a Moodle LMS'
+long_description 'Installs/Configures a Moodle LMS the Forescout way'
+version '0.1.0'
+
+depends 'apt',    '~> 4.0'
+depends 'system', '~> 0.11'
+depends 'ntp',    '~> 3.2.0'
