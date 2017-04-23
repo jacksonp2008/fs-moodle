@@ -1,0 +1,17 @@
+******************************************************
+******************************************************
+*** Final steps to Complete Setup ***
+
+Note - If you are not comfortable using terminal to create the config.php file that needs to be created when going through the installer, you should temporarily make the webroot writable by doing the following:
+
+sudo chmod -R 777 /var/www
+
+After you have ran the installer and you have moodle setup, you NEED to revert permissions so that it is no longer writable using the below command.
+
+sudo chmod -R 0755 /var/www
+
+Open your browser and go to http://IP.ADDRESS.OF.SERVER/moodle
+
+Follow the prompts
+******************************************************
+******************************************************
