@@ -1,48 +1,46 @@
-# vagrant-prep-ruby
+# Installer Structure
 -
 Pollock [jacksonp2008@gmail.com](mailto:jacksonp2008@gmail.com)  
-February 2017
+April 2017
 
-## Description
+Edit 'update-cookbooks' to add any repo's to '/site-cookbooks'
 
-Exercise to build local Chef cookbook to run as 'chef -z' on vagrant running Ubuntu to prep a rails development environment.
+Edit 'Berksfile' to add the cookbooks
 
-Using [these instructions](http://railsapps.github.io/installrubyonrails-ubuntu.html) from RailsApp Project.
+Run the update-cookbooks script to load the repository and vendor the cookbooks.
 
-### Create the Repo on [GitHub](https://github.com/jacksonp2008/vagrant-prep-ruby)
+### Example use:
 
-and clone locally
+Bring up vagrant and install chef.
 
-```
-git clone https://github.com/jacksonp2008/vagrant-prep-ruby.git
-Cloning into 'vagrant-prep-ruby'...
-warning: You appear to have cloned an empty repository.
-```
-### Create the base cookbook
+Here is a sample Vagrantfile
 
 ```
-chef generate cookbook .
-Generating cookbook vagrant-prep-ruby
-- Ensuring correct cookbook file content
-- Ensuring delivery configuration
-- Ensuring correct delivery build cookbook content
+cat Vagrantfile 
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+Vagrant.configure("2") do |config|
+# This is the base box we will use 
+  config.vm.box = "ubuntu/trusty64"
+# Setup the local network as you prefer
+  config.vm.network "private_network", type: "dhcp"
+# For some roles, more memory is required
+  config.vm.provider "virtualbox" do |vb|
+	vb.memory = "1024"
+  end
+end
 
-Your cookbook is ready. Type `cd .` to enter it.
-
-There are several commands you can run to get started locally developing and testing your cookbook.
-Type `delivery local --help` to see a full list.
-
-Why not start by writing a test? Tests for the default recipe are stored at:
-
-test/recipes/default_test.rb
-
-If you'd prefer to dive right in, the default recipe can be found at:
-
-recipes/default.rb
+$ vagrant up
+$ vagrant ssh
 
 ```
+### Install the latest ChefDK 
+from the [Chef Download Site](https://downloads.chef.io/chef-dk/ubuntu/).
 
-### Build the Recipe
+```
+$ cd /vagrant
+$ wget https://packages.chef.io/stable/ubuntu/12.04/chefdk_1.0.3-1_amd64.deb
+$ sudo dpkg -i chefdk_1.0.3-1_amd64.deb
+```
 
-Once the cookbook is complete, setup an an [installer structure](https://github.com/jacksonp2008/vagrant-builds) to work within, you can add other cookbooks as needed once in place.
-
+### Ready to Run
